@@ -235,9 +235,8 @@ objects:
   spec:
     source:
       git:
-        ref: pipeline
+        ref: demotest1
         uri: https://github.com/wzzrd/popular-movie-store
-        branch: demotest1
       type: Git
     strategy:
       type: JenkinsPipeline
