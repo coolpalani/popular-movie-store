@@ -41,8 +41,6 @@ objects:
     labels:
       project: ${PROJECT_NAME}
     name: popular-movie-store-s2i
-    annotations:
-      pipeline.alpha.openshift.io/uses: '[{"name": "populate-movie-store", "namespace": "${PROJECT_NAME}", "kind": "DeploymentConfig"}]'
   spec:
     output:
       to:
@@ -54,9 +52,11 @@ objects:
         uri: https://github.com/wzzrd/popular-movie-store
         branch: demotest1
     strategy:
-      type: JenkinsPipeline
-      jenkinsPipelineStrategy:
-        jenkinsfilePath: Jenkinsfile
+      sourceStrategy:
+        from:
+          kind: DockerImage
+          name: fabric8/s2i-java:2.0
+      type: Source
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
@@ -226,3 +226,20 @@ objects:
   kind: ConfigMap
   metadata:
     name: popular-movie-store
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      pipeline.alpha.openshift.io/uses: '[{"name": "populate-movie-store", "namespace": "${PROJECT_NAME}", "kind": "DeploymentConfig"}]'
+    name: populate-movie-store-pipeline
+  spec:
+    source:
+      git:
+        ref: pipeline
+        uri: https://github.com/wzzrd/popular-movie-store
+        branch: demotest1
+      type: Git
+    strategy:
+      type: JenkinsPipeline
+      jenkinsPipelineStrategy:
+        jenkinsfilePath: Jenkinsfile
