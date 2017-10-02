@@ -225,5 +225,4 @@ objects:
           cache: false
   kind: ConfigMap
   metadata:
-    creationTimestamp: null
     name: popular-movie-store
