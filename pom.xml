@@ -219,6 +219,7 @@
                     <regexMessage>Please pass a valid base64 encoded value for your apiKey</regexMessage>
                   </requireProperty>
                 </rules>
+                <skip>true</skip>
                 <fail>true</fail>
               </configuration>
             </execution>
