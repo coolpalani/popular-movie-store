@@ -28,7 +28,7 @@
              input message: "Promote to Azure?", ok: "Promote"
              // tag for stage
              // sh "${ocCmd} tag dev/tasks:latest stage/tasks:${v}"
-             println("Deploying to the Azure project"
+             println("Deploying to the Azure project")
              // sh "${mvnCmd} fabric:push --docker.push.registry=<AZURE REGISTRY>"
           }
 
