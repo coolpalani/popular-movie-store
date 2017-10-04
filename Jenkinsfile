@@ -16,21 +16,18 @@
                  },
                  'Static Analysis': {
                      //sh "${mvnCmd} jacoco:report sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -DskipTests=true"
-                   sleep(3000)
+                     println("Did static Sonar analysis")
                  }
              )
-
-             stage 'Push to Nexus'
-             sleep(3000) //sh "${mvnCmd} deploy -DskipTests=true"
-
-             stage 'Deploy DEV'
-             sleep(3000)
+  
+             stage 'Deploy Locally'
+             println("Deploying to the local project")
    
-             stage 'Deploy STAGE'
-             input message: "Promote to STAGE?", ok: "Promote"
+             stage 'Deploy Azure'
+             input message: "Promote to Azure?", ok: "Promote"
              // tag for stage
              // sh "${ocCmd} tag dev/tasks:latest stage/tasks:${v}"
-             sleep(3000)
+             println("Deploying to the Azure project")
           }
 
           def version() {
