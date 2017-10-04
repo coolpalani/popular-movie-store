@@ -1,17 +1,31 @@
 node('maven') {
-  stage('Clone populate-movie-store application') {
-  }
+             // define commands
+             def ocCmd = "oc --token=`cat /var/run/secrets/kubernetes.io/serviceaccount/token` --server=https://openshift.default.svc.cluster.local --certificate-authority=/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+             def mvnCmd = "mvn" // -s configuration/cicd-settings.xml
+
+             stage 'Build'
+             git branch: 'demotest1', url: 'https://github.com/wzzrd/popular-movie-store.git'
+             def v = version()
+             sh "${mvnCmd} clean install -DskipTests=true"
+
+             stage 'Test and Analysis'
+             parallel (
+                 'Test': {
+                     sh "${mvnCmd} test"
+                     step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+                 },
+                 'Static Analysis': {
+                     // missing Sonar, skipping this
+                 }
+             )
+
+             stage 'Push to Nexus'
+             // missing Nexus, skipping this
+
+             stage 'Deploy Locally'
   
-  stage('Build populate-movie-store application') {
-  }
-  
-  stage('Test populate-movie-store application') {
-  }
-
-  stage('QA populate-movie-store application') {
-  }
-
-  stage('Deploy populate-movie-store application to production (MS Azure)') {
-  }
-
-}
+             stage 'Deploy Azure'
+             input message: "Promote to Azure?", ok: "Promote"
+             // tag for stage
+             sh "${ocCmd} tag dev/tasks:latest stage/tasks:${v}"
+          }
