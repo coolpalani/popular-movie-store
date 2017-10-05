@@ -240,18 +240,11 @@
         <version>${spring-boot.version}</version>
       </plugin>
 
+      
       <plugin>
         <groupId>io.fabric8</groupId>
         <artifactId>fabric8-maven-plugin</artifactId>
         <version>${fabric8-maven-plugin.version}</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>build</goal>
-              <goal>resource</goal>
-            </goals>
-          </execution>
-        </executions>
         <configuration>
           <resourceDir>${fabric8-maven-plugin.resourceDir}</resourceDir>
           <images>
