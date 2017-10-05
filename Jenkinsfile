@@ -7,7 +7,7 @@
              def projectName3 = params.KUBE_NAMESPACE
 
   
-             println("Found env: ${projectName2}")
+             println("Found env:  ${projectName0} ${projectName1} ${projectName2} ${projectName3}")
   
              stage 'Build'
              sh "${ocCmd} start-build -Fw popular-movie-store-s2i -n crossclouddemo"
