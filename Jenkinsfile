@@ -3,13 +3,13 @@
              def ocCmd = "oc --token=`cat /var/run/secrets/kubernetes.io/serviceaccount/token` --server=https://openshift.default.svc.cluster.local --certificate-authority=/run/secrets/kubernetes.io/serviceaccount/ca.crt"
              
              stage 'Build'
-             sh "${ocCmd} start-build popular-movie-store-s2i -n buildpipeline --env=MAVEN_ARGS=compile"
+             sh "${ocCmd} start-build -Fw popular-movie-store-s2i -n buildpipeline --env=MAVEN_ARGS=compile"
    
              stage 'Run integration test'
-             sh "${ocCmd} start-build popular-movie-store-s2i -n buildpipeline --env=MAVEN_ARGS=test"  
+             sh "${ocCmd} start-build -Fw popular-movie-store-s2i -n buildpipeline --env=MAVEN_ARGS=test"  
              
              stage 'Deploy Locally'
-             sh "${ocCmd} start-build popular-movie-store-s2i -n buildpipeline --env=MAVEN_ARGS=fabric8:deploy"  
+             sh "${ocCmd} start-build -Fw popular-movie-store-s2i -n buildpipeline --env=MAVEN_ARGS=fabric8:deploy"  
              
              stage 'Deploy Azure'
              input message: "Promote to Azure?", ok: "Promote"
