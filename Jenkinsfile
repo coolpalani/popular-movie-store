@@ -6,7 +6,7 @@
              sh "${ocCmd} start-build -Fw popular-movie-store-s2i -n crossclouddemo"
    
              stage 'Run integration test'
-             sleep(1000)
+             sleep(1)
   
              stage 'Deploy Azure'
              input message: "Promote to Azure?", ok: "Promote"
