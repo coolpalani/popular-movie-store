@@ -1,7 +1,12 @@
  node('maven') {
              // define commands
              def ocCmd = "oc --token=`cat /var/run/secrets/kubernetes.io/serviceaccount/token` --server=https://openshift.default.svc.cluster.local --certificate-authority=/run/secrets/kubernetes.io/serviceaccount/ca.crt"            
-             def projectName = params.PROJECT_NAME
+             def projectName0 = env.NAMESPACE
+             def projectName1 = env.KUBE_NAMESPACE
+             def projectName2 = params.NAMESPACE
+             def projectName3 = params.KUBE_NAMESPACE
+
+  
              println("Found env: ${projectName}")
   
              stage 'Build'
