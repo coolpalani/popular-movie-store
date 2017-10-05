@@ -5,7 +5,8 @@
              def v = version()
              
              stage 'Build'
-             git branch: 'demotest1', url: 'https://github.com/wzzrd/popular-movie-store.git'
+             // git branch: 'demotest1', url: 'https://github.com/wzzrd/popular-movie-store.git'
+             sh "git clone -b demotest1 https://github.com/wzzrd/popular-movie-store.git"
              sh "${mvnCmd} clean compile -DskipTests=true"   
              
              stage 'Run integration test'
