@@ -19,7 +19,7 @@
     <log4j-bom.version>2.7</log4j-bom.version>
     <lombok.version>1.16.16</lombok.version>
     <jgroups.stack.file>default-jgroups-kubernetes.xml</jgroups.stack.file>
-    <maven.test.skip>true</maven.test.skip>
+    <maven.test.skip>false</maven.test.skip>
     <fabric8-maven-plugin.version>3.3.5</fabric8-maven-plugin.version>
 
     <!-- application configuration -->
