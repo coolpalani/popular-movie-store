@@ -13,7 +13,7 @@
              sh "${mvnCmd} test"   
              
              stage 'Deploy Locally'
-             sh "${ocCmd} start-build --from-file=./target/*.*ar -n buildpipeline"  
+             sh "${ocCmd} start-build --from-file=./target/*.jar -n ${projectname} "  
              
              stage 'Deploy Azure'
              input message: "Promote to Azure?", ok: "Promote"
