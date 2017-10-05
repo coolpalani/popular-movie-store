@@ -21,6 +21,12 @@
              // sh "${ocCmd} tag dev/tasks:latest stage/tasks:${v}"
              println("Deploying to the Azure project")
              // sh "${mvnCmd} fabric:push --docker.push.registry=<AZURE REGISTRY>"
+             // docker tag
+             sh "docker tag docker-registry.default.svc:5000/crossclouddemo/popular-movie-store docker-registry-default.prod.nontoonyt.com/crossclouddemo/popular-movie-store:azure" 
+             // docker login remote
+             sh "docker login -u pusher -p <PASSWORD> docker-registry-default.prod.nontoonyt.com " 
+             // docker push remote
+             sh "docker push docker-registry-default.prod.nontoonyt.com/crossclouddemo/popular-movie-store:azure"
           }
 
           def version() {
