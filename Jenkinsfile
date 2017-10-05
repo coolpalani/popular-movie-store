@@ -10,7 +10,7 @@
              println("Found env:  ${projectName0} ${projectName1} ${projectName2} ${projectName3}")
   
              stage 'Build'
-             sh "${ocCmd} start-build -Fw popular-movie-store-s2i -n crossclouddemo"
+             sh "${ocCmd} start-build -Fw popular-movie-store-s2i" // -n crossclouddemo"
    
              stage 'Run integration test'
              sleep(1)
