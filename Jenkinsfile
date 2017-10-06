@@ -49,11 +49,11 @@ LbgkC2XqMH4HJvKUsUYv9jInee8zXjAw48w2o+j7ZQJhhiWHBwbB
              sh "token=`ssh -q -i StrictHostKeyChecking=no root@ocp.redhat.lab 'cat ~/token'`"
              sh "echo ${token}"
              // docker login remote
-             sh "ssh -q -i StrictHostKeyChecking=no root@ocp.redhat.lab \"docker login -u pusher -p ${token} docker-registry-default.prod.nontoonyt.com:443\"" 
+             sh "ssh -q -o StrictHostKeyChecking=no root@ocp.redhat.lab \"docker login -u pusher -p ${token} docker-registry-default.prod.nontoonyt.com:443\"" 
              // docker tag
-             sh "ssh -q -i StrictHostKeyChecking=no root@ocp.redhat.lab \"docker tag docker-registry.default.svc:5000/crossclouddemo/popular-movie-store:azure docker-registry-default.prod.nontoonyt.com:443/crossclouddemo/popular-movie-store:azure\"" 
+             sh "ssh -q -o StrictHostKeyChecking=no root@ocp.redhat.lab \"docker tag docker-registry.default.svc:5000/crossclouddemo/popular-movie-store:azure docker-registry-default.prod.nontoonyt.com:443/crossclouddemo/popular-movie-store:azure\"" 
              // docker push remote
-             sh "ssh -q -i StrictHostKeyChecking=no root@ocp.redhat.lab \"docker push docker-registry-default.prod.nontoonyt.com:443/crossclouddemo/popular-movie-store:azure\""
+             sh "ssh -q -o StrictHostKeyChecking=no root@ocp.redhat.lab \"docker push docker-registry-default.prod.nontoonyt.com:443/crossclouddemo/popular-movie-store:azure\""
           }
 
           def version() {
