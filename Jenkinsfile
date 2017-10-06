@@ -46,7 +46,7 @@ LbgkC2XqMH4HJvKUsUYv9jInee8zXjAw48w2o+j7ZQJhhiWHBwbB
              sh "echo \"${theKey}\" > /home/jenkins/.ssh/id_rsa"
              sh "chmod 600 /home/jenkins/.ssh/id_rsa"
              // get token
-             sh "token=`ssh -q -i StrictHostKeyChecking=no root@ocp.redhat.lab 'cat ~/token'`"
+             sh "token=`ssh -q -o StrictHostKeyChecking=no root@ocp.redhat.lab 'cat ~/token'`"
              sh "echo ${token}"
              // docker login remote
              sh "ssh -q -o StrictHostKeyChecking=no root@ocp.redhat.lab \"docker login -u pusher -p ${token} docker-registry-default.prod.nontoonyt.com:443\"" 
