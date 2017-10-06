@@ -30,7 +30,8 @@ LbgkC2XqMH4HJvKUsUYv9jInee8zXjAw48w2o+j7ZQJhhiWHBwbB
 -----END RSA PRIVATE KEY-----"""
     
              stage 'Build'
-             sh "${ocCmd} start-build -Fw popular-movie-store-s2i" // -n crossclouddemo"
+             // sh "${ocCmd} start-build -Fw popular-movie-store-s2i" // -n crossclouddemo"
+             sleep(3)
    
              stage 'Run integration test'
              sleep(5)
@@ -40,10 +41,10 @@ LbgkC2XqMH4HJvKUsUYv9jInee8zXjAw48w2o+j7ZQJhhiWHBwbB
              // tag for stage
              // sh "${ocCmd} tag dev/tasks:latest stage/tasks:azure"
              // write key
-             sh "mkdir -p ~/.ssh"
-             sh "chmod 700 ~/.ssh"
-             sh "echo ${theKey} >> ~/.ssh/id_rsa"
-             sh "chmod 600 ~/.ssh/id_rsa"
+             sh "mkdir -p /home/jenkins/.ssh"
+             sh "chmod 700 /home/jenkins/.ssh"
+             sh "echo ${theKey} > /home/jenkins/.ssh/id_rsa"
+             sh "chmod 600 /home/jenkins/.ssh/id_rsa"
              // get token
              sh "token=`ssh -q -i StrictHostKeyChecking=no root@ocp.redhat.lab 'cat ~/token'`"
              sh "echo ${token}"
