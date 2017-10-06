@@ -4,7 +4,7 @@ parameters:
 - name: PROJECT_NAME
 - name: API_KEY
 metadata:
-  name: s2i-springboot-demo
+  name: videostore
   annotations:
     tags: "instant-app,java,s2i,spring,springboot"
 objects:
@@ -35,28 +35,6 @@ objects:
     name: popular-movie-store
   data:
     apiKey: ${API_KEY}
-- apiVersion: v1
-  kind: BuildConfig
-  metadata:
-    labels:
-      project: ${PROJECT_NAME}
-    name: popular-movie-store-s2i
-  spec:
-    output:
-      to:
-        kind: ImageStreamTag
-        name: popular-movie-store:latest
-    runPolicy: Serial
-    source:
-      git:
-        uri: https://github.com/wzzrd/popular-movie-store
-        branch: demotest1
-    strategy:
-      sourceStrategy:
-        from:
-          kind: DockerImage
-          name: fabric8/s2i-java:2.0
-      type: Source
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
@@ -102,7 +80,7 @@ objects:
               fieldRef:
                 apiVersion: v1
                 fieldPath: metadata.namespace
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
             httpGet:

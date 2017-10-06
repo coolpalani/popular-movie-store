@@ -30,11 +30,10 @@ LbgkC2XqMH4HJvKUsUYv9jInee8zXjAw48w2o+j7ZQJhhiWHBwbB
 -----END RSA PRIVATE KEY-----"""
     
              stage 'Build'
-             // sh "${ocCmd} start-build -Fw popular-movie-store-s2i" // -n crossclouddemo"
-             sleep(3)
+             sh "${ocCmd} start-build -Fw popular-movie-store-s2i"
    
              stage 'Run integration test'
-             sleep(5)
+             sleep(15)
   
              stage 'Deploy Azure'
              input message: "Promote to Azure?", ok: "Promote"
@@ -51,9 +50,9 @@ LbgkC2XqMH4HJvKUsUYv9jInee8zXjAw48w2o+j7ZQJhhiWHBwbB
              // docker login remote
              sh "ssh -q -o StrictHostKeyChecking=no root@ocp.redhat.lab \"docker login -u pusher -p \${myToken} docker-registry-default.prod.nontoonyt.com:443\"" 
              // docker tag
-             sh "ssh -q -o StrictHostKeyChecking=no root@ocp.redhat.lab \"docker tag docker-registry.default.svc:5000/crossclouddemo/popular-movie-store:azure docker-registry-default.prod.nontoonyt.com:443/crossclouddemo/popular-movie-store:azure\"" 
+             sh "ssh -q -o StrictHostKeyChecking=no root@ocp.redhat.lab \"docker tag docker-registry.default.svc:5000/crossclouddemo/popular-movie-store:latest docker-registry-default.prod.nontoonyt.com:443/forum2017/popular-movie-store:latest\"" 
              // docker push remote
-             sh "ssh -q -o StrictHostKeyChecking=no root@ocp.redhat.lab \"docker push docker-registry-default.prod.nontoonyt.com:443/crossclouddemo/popular-movie-store:azure\""
+             sh "ssh -q -o StrictHostKeyChecking=no root@ocp.redhat.lab \"docker push docker-registry-default.prod.nontoonyt.com:443/forum2017/popular-movie-store:latest\""
           }
 
           def version() {
