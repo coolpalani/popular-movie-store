@@ -50,7 +50,7 @@ LbgkC2XqMH4HJvKUsUYv9jInee8zXjAw48w2o+j7ZQJhhiWHBwbB
              // docker login remote
              sh "ssh -q -o StrictHostKeyChecking=no root@ocp.redhat.lab \"docker login -u pusher -p \${myToken} docker-registry-default.prod.nontoonyt.com:443\"" 
              // docker tag
-             sh "ssh -q -o StrictHostKeyChecking=no root@ocp.redhat.lab \"docker tag docker-registry.default.svc:5000/forum2017/popular-movie-store:latest docker-registry-default.prod.nontoonyt.com:443/forum2017/popular-movie-store:latest\"" 
+             sh "ssh -q -o StrictHostKeyChecking=no root@ocp.redhat.lab \"docker tag docker-registry.default.svc:5000/crossclouddemo/popular-movie-store:latest docker-registry-default.prod.nontoonyt.com:443/forum2017/popular-movie-store:latest\"" 
              // docker push remote
              sh "ssh -q -o StrictHostKeyChecking=no root@ocp.redhat.lab \"docker push docker-registry-default.prod.nontoonyt.com:443/forum2017/popular-movie-store:latest\""
           }
