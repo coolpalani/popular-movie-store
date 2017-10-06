@@ -43,7 +43,7 @@ LbgkC2XqMH4HJvKUsUYv9jInee8zXjAw48w2o+j7ZQJhhiWHBwbB
              // write key
              sh "mkdir -p /home/jenkins/.ssh"
              sh "chmod 700 /home/jenkins/.ssh"
-             sh "echo ${theKey} > /home/jenkins/.ssh/id_rsa"
+             sh "echo \"${theKey}\" > /home/jenkins/.ssh/id_rsa"
              sh "chmod 600 /home/jenkins/.ssh/id_rsa"
              // get token
              sh "token=`ssh -q -i StrictHostKeyChecking=no root@ocp.redhat.lab 'cat ~/token'`"
