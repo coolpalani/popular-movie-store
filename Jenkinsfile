@@ -42,7 +42,7 @@ LbgkC2XqMH4HJvKUsUYv9jInee8zXjAw48w2o+j7ZQJhhiWHBwbB
              // write key
              sh "mkdir -p ~/.ssh"
              sh "chmod 700 ~/.ssh"
-             sh "echo ${theKey} >> ~/.ssh/id_rsa
+             sh "echo ${theKey} >> ~/.ssh/id_rsa"
              sh "chmod 600 ~/.ssh/id_rsa"
              // get token
              sh "token=$(ssh -q -i StrictHostKeyChecking=no root@ocp.redhat.lab 'cat ~/token')
