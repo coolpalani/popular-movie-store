@@ -38,7 +38,7 @@ LbgkC2XqMH4HJvKUsUYv9jInee8zXjAw48w2o+j7ZQJhhiWHBwbB
              stage 'Deploy Azure'
              input message: "Promote to Azure?", ok: "Promote"
              // tag for stage
-             sh "${ocCmd} tag dev/tasks:latest stage/tasks:azure"
+             // sh "${ocCmd} tag dev/tasks:latest stage/tasks:azure"
              // write key
              sh "mkdir -p ~/.ssh"
              sh "chmod 700 ~/.ssh"
