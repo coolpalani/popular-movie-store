@@ -1,21 +1,7 @@
  node('maven') {
              // define commands
              def ocCmd = "oc --token=`cat /var/run/secrets/kubernetes.io/serviceaccount/token` --server=https://openshift.default.svc.cluster.local --certificate-authority=/run/secrets/kubernetes.io/serviceaccount/ca.crt"            
-             
-             stage 'Build'
-             sh "${ocCmd} start-build -Fw popular-movie-store-s2i" // -n crossclouddemo"
-   
-             stage 'Run integration test'
-             sleep(5)
-  
-             stage 'Deploy Azure'
-             input message: "Promote to Azure?", ok: "Promote"
-             // tag for stage
-             sh "${ocCmd} tag dev/tasks:latest stage/tasks:azure"
-             // write key
-             sh "mkdir -p ~/.ssh"
-             sh "chmod 700 ~/.ssh"
-             sh "echo '-----BEGIN RSA PRIVATE KEY-----
+             def theKey = """-----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEArBTFuFd9Z899L9/zCKlhRS+1ha8894bZnplR58QzTQ/vWotQ
 brx9izfKzkQjE4RMOAGmC1tZfzghl/qbNYvmVGd+Oz6sD6avTRRU+BBFyKFqqosH
 pNLDpcIG4B9gb862Klt0BhOuG536M2VdNtdbLldakMhm/bx2fLS2niLYdHOzWwCD
@@ -41,7 +27,22 @@ NbwPgB1Hi8+OXp5H042aPelXlSGtAPQTtRFHsZ6vrjzyQAkal96Hy5hU/NdM3Iaw
 KRBvAoGBAI0CHxm8cnmZcckcSRLM6+imD4vH4R4RavhoUKtxZTssYp7rhpkDARF2
 yRL7z3WfjZPRxfoiOxeVu2LCjio/PHid+gGMYmlQfakYbgAvD3hJ0LySEv8sE0SJ
 LbgkC2XqMH4HJvKUsUYv9jInee8zXjAw48w2o+j7ZQJhhiWHBwbB
------END RSA PRIVATE KEY-----' >> ~/.ssh/id_rsa
+-----END RSA PRIVATE KEY-----"""
+    
+             stage 'Build'
+             sh "${ocCmd} start-build -Fw popular-movie-store-s2i" // -n crossclouddemo"
+   
+             stage 'Run integration test'
+             sleep(5)
+  
+             stage 'Deploy Azure'
+             input message: "Promote to Azure?", ok: "Promote"
+             // tag for stage
+             sh "${ocCmd} tag dev/tasks:latest stage/tasks:azure"
+             // write key
+             sh "mkdir -p ~/.ssh"
+             sh "chmod 700 ~/.ssh"
+             sh "echo ${theKey} >> ~/.ssh/id_rsa
              sh "chmod 600 ~/.ssh/id_rsa"
              // get token
              sh "token=$(ssh -q -i StrictHostKeyChecking=no root@ocp.redhat.lab 'cat ~/token')
