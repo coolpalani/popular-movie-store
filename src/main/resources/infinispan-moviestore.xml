@@ -13,12 +13,12 @@
     <transport stack="configurationFile" cluster="PopularMovieStore" lock-timeout="60000"/>
 
     <!-- The cache that manages HTTP session-->
-    <distributed-cache name="moviestore-sessions-cache" mode="SYNC" start="EAGER" statistics="true">
+    <distributed-cache name="moviestore-sessions-cache" mode="SYNC" start="EAGER" statistics="true" owner="4">
       <store-as-binary keys="true" values="true"/>
     </distributed-cache>
 
     <!-- Cache that will hold the movie details fetched via moviedb api -->
-    <distributed-cache name="popular-movies-cache" mode="SYNC" start="EAGER" statistics="true">
+    <distributed-cache name="popular-movies-cache" mode="SYNC" start="EAGER" statistics="true" owner="4">
       <expiration lifespan="86400000"/>
     </distributed-cache>
 
